@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "342886117655",
+    "project_id": "socialsign-6b540",
+    "storage_bucket": "socialsign-6b540.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:342886117655:android:d2958f0fd85c872604c752",
+        "android_client_info": {
+          "package_name": "com.social_sign"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "342886117655-nv9d9eedf2l4f01t3bqecgctftqt7t2h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.social_sign",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "342886117655-c1i5uvjdbr6cgjqb16dg7mfllj4kp9au.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXuZ9jlgDUFjFtsAW4nz7Sh__2ApuHno4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "342886117655-c1i5uvjdbr6cgjqb16dg7mfllj4kp9au.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

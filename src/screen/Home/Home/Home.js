@@ -1,5 +1,5 @@
 import {View, Text, ToastAndroid} from 'react-native';
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState, useRef, useEffect, useMemo} from 'react';
 import {ScrollView, TouchableOpacity, RefreshControl} from 'react-native';
 import {
   ModalUpdateAndDelete,
@@ -26,10 +26,9 @@ const Home = () => {
   const [addModalVisible, setAddModalVisible] = useState(false);
   const [updateModalVisible, setUpdateModalVisible] = useState(false);
   const [detailModalVisible, setDetailModalVisible] = useState(false);
-  const [animationAddButton, setAnimationAddButton] = useState(false);
   // IsLoading
   const [isLoadingModallAddNote, setIsLoadingModallAddNote] = useState(false);
-  const [isLoadingModallUpdateNote, setIsLoadingModallUpdateNote] =
+  const [isLoadingModallUpdateNote, setIsLoadingModallUpdateNote] = useState()
     useState(false);
   // TextInput
   const [descriptionNote, setDescriptionNote] = useState('');
@@ -38,32 +37,34 @@ const Home = () => {
   const [task, setTask] = useState([]);
 
   const getAllTask = async () => {
-    await AsyncStorage.getItem('tasks')
-      .then(async data => {
-        if (data) {
-          setTask(JSON.parse(data));
-        } else {
-          setTask([]);
-        }
-      })
-      .catch(error => {
-        console.log('Terjadi Kesalahan');
-      });
+    const allData = await GetAllTask();
+
+    if (allData.status === 'success') {
+      setTask(allData.tasks);
+    } else {
+      ToastAndroid.show(allData.message, ToastAndroid.SHORT);
+      setTask([]);
+    }
   };
 
+  
   useEffect(() => {
     getAllTask();
   }, []);
 
+  useMemo(() => {
+    console.log(titleNote);
+    console.log(descriptionNote);
+  }, [titleNote, descriptionNote]);
+  
+
   const onRefreshTask = async () => {
     getAllTask();
-    return;
   };
 
   const openModalAddNote = () => {
     refButtonAdd.current.rubberBand(1000);
     setAddModalVisible(true);
-    return;
   };
 
   const openModalUpdateAndDelete = async (id, name, description) => {
@@ -71,7 +72,6 @@ const Home = () => {
     setId(id);
     setTitleNote(name);
     setDescriptionNote(description);
-    return;
   };
 
   const openModalUpdate = async () => {
@@ -95,11 +95,9 @@ const Home = () => {
       setIsLoadingModallAddNote(false);
       setAddModalVisible(false);
       getAllTask();
-      return;
     } else {
       ToastAndroid.show('Catatan gagal ditambahkan', ToastAndroid.SHORT);
       setIsLoadingModallAddNote(false);
-      return;
     }
   };
 
@@ -110,10 +108,8 @@ const Home = () => {
       ToastAndroid.show('Catatan berhasil dihapus', ToastAndroid.SHORT);
       setModalVisible(false);
       getAllTask();
-      return;
     } else {
       ToastAndroid.show('Catatan gagal dihapus', ToastAndroid.SHORT);
-      return;
     }
   };
 
@@ -134,11 +130,9 @@ const Home = () => {
       setUpdateModalVisible(false);
       setIsLoadingModallUpdateNote(false);
       getAllTask();
-      return;
     } else {
       ToastAndroid.show('Catatan gagal diupdate', ToastAndroid.SHORT);
       setIsLoadingModallUpdateNote(false);
-      return;
     }
   };
 
@@ -153,10 +147,8 @@ const Home = () => {
     if (consumeGetTaskById.status === 'success') {
       setTitleNote(consumeGetTaskById.task.name);
       setDescriptionNote(consumeGetTaskById.task.description);
-      return;
     } else {
       ToastAndroid.show('Gagal menampilkan catatan', ToastAndroid.SHORT);
-      return;
     }
   };
 
@@ -479,7 +471,7 @@ const Home = () => {
             color: '#fff',
           }}
           textButtonAdd={'Tambah Catatan'}
-          isLoading={isLoadingModallAddNote}
+          isLoading={isLoadingModallUpdateNote}
           onChangeTextTitleNote={text => setTitleNote(text)}
           onChangeTextNoteDescription={text => setDescriptionNote(text)}
           titleNote={titleNote}

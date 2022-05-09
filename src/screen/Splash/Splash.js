@@ -55,20 +55,10 @@ const Splash = () => {
       const allData = await GetAllTask();
 
       if (allData.status === 'success') {
-        await AsyncStorage.setItem('tasks', JSON.stringify(allData.tasks)).then(
-          async () => {
-              navigation.replace('Login');
-          },
-        );
+        navigation.replace('Login');
       } else {
         ToastAndroid.show(allData.message, ToastAndroid.SHORT);
-        await AsyncStorage.setItem('tasks', JSON.stringify([]))
-          .then(() => {
-            navigation.navigate('Login');
-          })
-          .catch(error => {
-            console.log('Terjadi Kesalahan');
-          });
+        navigation.navigate('Login');
       }
     };
 

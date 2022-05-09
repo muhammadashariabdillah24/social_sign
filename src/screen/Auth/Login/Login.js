@@ -48,10 +48,10 @@ const Login = () => {
         '342886117655-c1i5uvjdbr6cgjqb16dg7mfllj4kp9au.apps.googleusercontent.com',
       offlineAccess: true,
     });
-    
+
     return () => {
       cleanUpRef.current = false;
-    }
+    };
   }, []);
 
   async function onFacebookButtonPress() {
@@ -99,12 +99,11 @@ const Login = () => {
               ],
               {cancelable: false},
             );
-            return;
           }
 
           const data = {
             email: email || '',
-          }
+          };
 
           await FacebookSignInServices(data)
             .then(res => {
@@ -192,7 +191,6 @@ const Login = () => {
               ],
               {cancelable: false},
             );
-            return;
           }
 
           const data = {
@@ -202,6 +200,8 @@ const Login = () => {
           await GoggleSignInServices(data)
             .then(res => {
               setAuthLoading(true);
+
+              console.log(res);
 
               const {status} = res;
 
@@ -461,6 +461,26 @@ const Login = () => {
                 color: '#fff',
               }}>
               Goggle
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+              position: 'relative',
+              borderRadius: 5,
+              marginVertical: 30
+            }}
+            onPress={() => navigation.navigate('SignUp')}>
+            <Text
+              style={{
+                fontFamily: 'Raleway-Regular',
+                fontSize: 14,
+                color: '#fff',
+              }}>
+              Belum punya akun ? Silahkan lakukan registrasi
             </Text>
           </TouchableOpacity>
         </View>

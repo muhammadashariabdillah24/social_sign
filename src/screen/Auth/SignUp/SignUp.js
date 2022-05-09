@@ -87,7 +87,6 @@ const SignUp = () => {
               ],
               {cancelable: false},
             );
-            return;
           }
 
           const data = {
@@ -172,7 +171,6 @@ const SignUp = () => {
               ],
               {cancelable: false},
             );
-            return;
           }
 
           const data = {
@@ -222,7 +220,6 @@ const SignUp = () => {
             })
             .finally(() => {
               setAuthLoading(false);
-              // clearTimeout(statusTimeout);
             });
         });
     } catch (error) {
@@ -337,6 +334,26 @@ const SignUp = () => {
             Goggle
           </Text>
         </TouchableOpacity>
+
+        <TouchableOpacity
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+              position: 'relative',
+              borderRadius: 5,
+              marginVertical: 30
+            }}
+            onPress={() => navigation.navigate('Login')}>
+            <Text
+              style={{
+                fontFamily: 'Raleway-Regular',
+                fontSize: 14,
+                color: '#fff',
+              }}>
+              Sudah punya akun ? Silahkan masuk
+            </Text>
+          </TouchableOpacity>
       </View>
     </View>
   );

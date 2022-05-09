@@ -3,14 +3,11 @@ import Splash from '../../screen/Splash/Splash';
 import Login from '../../screen/Auth/Login/Login';
 import SignUp from '../../screen/Auth/SignUp/SignUp';
 import Home from '../../screen/Home/Home/Home';
-import AnimatableExtra from '../../../testing';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {TouchableOpacity, Text, ToastAndroid, Alert} from 'react-native';
+import {TouchableOpacity, ToastAndroid, Alert} from 'react-native';
 import {
   GoogleSignin,
-  GoogleSigninButton,
-  statusCodes,
 } from '@react-native-google-signin/google-signin';
 import {LoginManager, AccessToken} from 'react-native-fbsdk-next';
 import {useNavigation} from '@react-navigation/native';
@@ -71,7 +68,6 @@ const StackNavigator = () => {
           headerShown: false,
         }}
       />
-      <Stack.Screen name="AnimatableExtra" component={AnimatableExtra} />
       <Stack.Screen
         name="Login"
         component={Login}
